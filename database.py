@@ -11,6 +11,17 @@ SCHEMA_FILE = BASE_DIR / 'sql' / 'schema_and_seed.sql'
 
 
 def _config(include_database=True):
+    if "mysql" in st.secrets:
+        cfg = {
+            'host': st.secrets["mysql"]["host"],
+            'port': int(st.secrets["mysql"]["port"]),
+            'user': st.secrets["mysql"]["username"],
+            'password': st.secrets["mysql"]["password"],
+        }
+        if include_database:
+            cfg['database'] = st.secrets["mysql"]["database"]
+        return cfg
+    
     cfg = {
         'host': os.getenv('DB_HOST', 'localhost'),
         'port': int(os.getenv('DB_PORT', '3306')),
@@ -20,7 +31,6 @@ def _config(include_database=True):
     if include_database:
         cfg['database'] = os.getenv('DB_NAME', 'kramat_motor_bi')
     return cfg
-
 
 def get_connection():
     return mysql.connector.connect(**_config(True))
