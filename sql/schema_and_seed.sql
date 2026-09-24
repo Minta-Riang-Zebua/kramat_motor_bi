@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS kramat_motor_bi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE kramat_motor_bi;
+-- CREATE DATABASE IF NOT EXISTS kramat_motor_bi CHARACTER SET utf8mb4;
+-- USE kramat_motor_bi;
 
 CREATE TABLE IF NOT EXISTS tb_user (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
