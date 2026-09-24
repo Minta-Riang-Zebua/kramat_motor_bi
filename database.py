@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import mysql.connector
 import pandas as pd
+import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
