@@ -11,6 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent
 SCHEMA_FILE = BASE_DIR / 'sql' / 'schema_and_seed.sql'
 
 
+import streamlit as st
+
 def _config(include_database=True):
     if "mysql" in st.secrets:
         cfg = {
@@ -22,6 +24,16 @@ def _config(include_database=True):
         if include_database:
             cfg['database'] = st.secrets["mysql"]["database"]
         return cfg
+    
+    cfg = {
+        'host': os.getenv('DB_HOST', 'localhost'),
+        'port': int(os.getenv('DB_PORT', '3306')),
+        'user': os.getenv('DB_USER', 'root'),
+        'password': os.getenv('DB_PASSWORD', ''),
+    }
+    if include_database:
+        cfg['database'] = os.getenv('DB_NAME', 'kramat_motor_bi')
+    return cfg
     
     cfg = {
         'host': os.getenv('DB_HOST', 'localhost'),
